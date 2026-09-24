@@ -1,109 +1,149 @@
 # KeyShield
 
-A small Python-based endpoint telemetry demonstration for cybersecurity education.
+A Python-based endpoint telemetry and detection demonstration for cybersecurity education.
 
 ## Overview
 
 KeyShield demonstrates a simplified blue-team workflow:
 
-Telemetry → Analysis → Detection → Reporting
+**Endpoint Telemetry → Event Analysis → Detection → Reporting**
 
-The application records keyboard event types from a controlled text box and generates basic session statistics.
-
-It does not store the actual characters typed.
+The application provides a controlled environment for recording keyboard event types from its own text box and analyzing the resulting session activity.
 
 ## Features
 
 - Controlled keyboard-event monitoring
 - Start/Stop session controls
-- Privacy-preserving event logging
-- CSV session storage
-- Session statistics
+- Privacy-preserving telemetry
+- CSV session logging
+- Automatic session numbering
+- Event statistics
 - Event-rate analysis
-- Basic rule-based activity detection
+- Rule-based activity detection
 - Session report generation
-- Simple graphical interface
+- Simple Tkinter graphical interface
 
 ## Demo
 
 ![KeyShield Demo](screenshots/keyshield-demo.png)
 
-## Detection Logic
+## Telemetry
 
-KeyShield currently uses a simple rule-based threshold.
+KeyShield records event types rather than the actual characters typed.
 
-Event rate greater than 8 events/second:
+Recorded event types include:
 
-HIGH EVENT RATE
+- `CHARACTER`
+- `SPACE`
+- `ENTER`
+- `BACKSPACE`
 
-Otherwise:
+Example telemetry:
 
-NORMAL
+    timestamp,event_type
+    2026-09-24 21:10:12,CHARACTER
+    2026-09-24 21:10:12,CHARACTER
+    2026-09-24 21:10:13,SPACE
+    2026-09-24 21:10:14,ENTER
 
-This is intentionally simple and is meant to demonstrate the concept of detection logic rather than provide a production security detector.
+## Detection
+
+After a session ends, KeyShield calculates:
+
+- Total events
+- Session duration
+- Events per second
+- Event-type breakdown
+
+A simple threshold-based rule flags unusually high event rates.
+
+**Detection rule:** Event rate greater than 8 events per second → `HIGH EVENT RATE`
+
+Otherwise → `NORMAL`
+
+This is intentionally a simple rule-based detector rather than a machine-learning model.
 
 ## Project Structure
 
-KeyShield/
-├── src/
-│   └── main.py
-├── sessions/
-│   └── .gitkeep
-├── screenshots/
-├── .gitignore
-├── README.md
-└── requirements.txt
+    KeyShield/
+    ├── screenshots/
+    │   └── keyshield-demo.png
+    ├── sessions/
+    │   └── .gitkeep
+    ├── src/
+    │   └── main.py
+    ├── .gitignore
+    ├── README.md
+    └── requirements.txt
 
 ## Installation
 
-Create a virtual environment:
+Clone the repository and enter the project directory.
 
-python -m venv .virtual
+`git clone https://github.com/kovidsharma27/KeyShield.git`
 
-Activate it on Windows:
+`cd KeyShield`
 
-.\.virtual\Scripts\Activate.ps1
+Create a virtual environment.
 
-Install dependencies:
+`python -m venv .virtual`
 
-pip install -r requirements.txt
+Activate it on Windows PowerShell.
 
-Run KeyShield:
+`.\.virtual\Scripts\Activate.ps1`
 
-python src/main.py
+Install dependencies.
+
+`pip install -r requirements.txt`
+
+Run KeyShield.
+
+`python src/main.py`
 
 ## Usage
 
-1. Start the application.
-2. Click START SESSION.
-3. Enter test text in the provided text box.
-4. Click STOP SESSION.
+1. Launch KeyShield.
+2. Click **START SESSION**.
+3. Type test text into the application text box.
+4. Click **STOP SESSION**.
 5. Review the generated session report.
-6. Check the sessions directory for the CSV telemetry file.
+6. Session telemetry is saved as a CSV file in `sessions/`.
 
 ## Privacy and Safety
 
 KeyShield is designed for authorized cybersecurity demonstrations.
 
-It:
+It does not:
 
-- monitors only its own controlled text box
-- records event types rather than typed content
-- does not capture passwords
-- does not monitor other applications
-- does not use stealth mechanisms
-- does not establish persistence
-- does not transmit collected data
+- capture passwords
+- monitor other applications
+- record actual typed characters in telemetry
+- transmit collected data
+- use stealth mechanisms
+- use persistence mechanisms
 
-Only use the project with input you are authorized to monitor.
+Only use the application with input you are authorized to monitor.
+
+## Technologies
+
+- Python
+- Tkinter
+- CSV
+- Git
+- GitHub
 
 ## Future Improvements
 
-Possible future development:
+Possible future improvements include:
 
-- richer telemetry visualization
-- additional endpoint telemetry
-- improved detection rules
-- anomaly detection
-- machine-learning-based analysis
-- detection dashboards
+- Improved telemetry visualization
+- Additional endpoint telemetry
+- More advanced detection rules
+- Anomaly detection
+- Machine-learning-based analysis
+
+## Author
+
+**Kovid Sharma**
+
+Cybersecurity project focused on endpoint telemetry, detection, and defensive security concepts.
