@@ -24,6 +24,10 @@ It does not store the actual characters typed.
 - Session report generation
 - Simple graphical interface
 
+## Demo
+
+![KeyShield Demo](screenshots/keyshield-demo.png)
+
 ## Detection Logic
 
 KeyShield currently uses a simple rule-based threshold.
