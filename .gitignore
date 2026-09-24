@@ -1,0 +1,8 @@
+.virtual/
+__pycache__/
+*.pyc
+
+.vscode/
+
+sessions/*
+!sessions/.gitkeep
